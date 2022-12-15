@@ -1,24 +1,29 @@
-import logo from './logo.svg';
+import { Routes, Route, Navigate } from "react-router-dom";
+import Main from './components/main';
+import LogIn from './components/login';
+import ProtectedRoute from "./components/protectedroute";
+import { UserContextProvider } from '../src/context/usercred'
+import { SearchContextProvider } from "./context/searchcontext";
+import { ChatContextProvider } from "./context/chatcontext";
+import ModalContextProvider from './context/modalcontext'
 import './App.css';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserContextProvider>
+      <ChatContextProvider>
+        <ModalContextProvider>
+          <SearchContextProvider>
+            <Routes>
+              <Route path="/" />
+              <Route index element={<ProtectedRoute><Main /></ProtectedRoute>} />
+              <Route path='login' element={localStorage.getItem('Allow') ? <Navigate to='/' /> : <LogIn />} />
+            </Routes>
+          </SearchContextProvider>
+        </ModalContextProvider>
+      </ChatContextProvider>
+    </UserContextProvider>
   );
 }
 
