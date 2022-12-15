@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Main from './components/main';
 import LogIn from './components/login';
+import NotFound from "./components/notfound";
 import ProtectedRoute from "./components/protectedroute";
 import { UserContextProvider } from '../src/context/usercred'
 import { SearchContextProvider } from "./context/searchcontext";
@@ -19,6 +20,7 @@ function App() {
               <Route path="/" />
               <Route index element={<ProtectedRoute><Main /></ProtectedRoute>} />
               <Route path='login' element={localStorage.getItem('Allow') ? <Navigate to='/' /> : <LogIn />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </SearchContextProvider>
         </ModalContextProvider>
