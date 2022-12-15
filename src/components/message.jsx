@@ -33,7 +33,6 @@ const Message = ({ message }) => {
 
     }
 
-    console.log(message)
     return (
         <React.Fragment>
             {(message.text || message.img) && <div ref={ref} className={`${message.senderId === usercontext.userId ? 'messagesent' : 'messagereceived'}`}>

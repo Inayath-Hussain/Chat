@@ -15,7 +15,6 @@ export const UserContextProvider = ({ children }) => {
                 setuserName(user.displayName);
                 setuserPhoto(user.photoURL);
                 setuserId(user.uid)
-                console.log(user)
             }
         })
         return () => {
